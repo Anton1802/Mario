@@ -10,16 +10,33 @@ public class MovePlayer : MonoBehaviour
 
     public Rigidbody2D player;
 
+    private void Jump() => player.velocity = new Vector2(0, jumpPower);
+
+
+
     private void Move()
     {
 
         var horizontal = Input.GetAxisRaw("Horizontal");
 
+        SpriteRenderer sprite = GetComponent<SpriteRenderer>();
+
+        if(Input.GetKey(KeyCode.A))
+        {
+
+            sprite.flipX = true;
+
+        }
+        else if(Input.GetKey(KeyCode.D))
+        {
+
+            sprite.flipX = false;
+
+        }
+
         player.velocity = new Vector2(horizontal * playerSpeed, player.velocity.y);
 
     }
-
-    private void Jump() => player.velocity = new Vector2(0, jumpPower);
 
     void Update()
     {
