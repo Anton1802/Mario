@@ -9,10 +9,28 @@ public class MovePlayer : MonoBehaviour
     private float jumpPower = 5.0f;
 
     public Rigidbody2D player;
+    public LayerMask groundLayer;
+    public float distance;
 
     private void Jump() => player.velocity = new Vector2(0, jumpPower);
 
+    private bool isGrounded()
+    {
 
+        Vector2 position = transform.position;
+        Vector2 direction = Vector2.down;
+
+        RaycastHit2D hit = Physics2D.Raycast(position, direction, distance, groundLayer);
+        if(hit.collider != null)
+        {
+
+            return true;
+
+        }
+
+        return false;
+
+    }
 
     private void Move()
     {
@@ -43,7 +61,7 @@ public class MovePlayer : MonoBehaviour
 
         Move();
 
-        if(Input.GetKey(KeyCode.Space))
+        if(Input.GetKey(KeyCode.Space) && isGrounded())
         Jump();
 
     }
