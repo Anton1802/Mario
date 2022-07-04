@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MovePlayer : MonoBehaviour
 {
@@ -25,7 +26,6 @@ public class MovePlayer : MonoBehaviour
         {
 
             return true;
-
         }
 
         return false;
@@ -63,6 +63,13 @@ public class MovePlayer : MonoBehaviour
 
         if(Input.GetKey(KeyCode.Space) && isGrounded())
         Jump();
+
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+
+            SceneManager.LoadScene("Menu");
 
     }
 
